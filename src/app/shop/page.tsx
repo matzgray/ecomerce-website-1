@@ -126,6 +126,7 @@ import Filters from "@/components/shop-page/filters";
 import { FiSliders } from "react-icons/fi";
 import { newArrivalsData, relatedProductData, topSellingData } from "../page"; // Adjust path if necessary
 import ProductCard from "@/components/common/ProductCard";
+
 import {
   Pagination,
   PaginationContent,
@@ -138,13 +139,17 @@ import {
 
 // Correct PageProps interface
 interface PageProps {
-  params: {
-    slug?: string[]; // Optional for better compatibility
-  };
+  params: { slug?: string[] };
 }
 
+const pageprops: React.FC<PageProps> = ({ params }) => {
+  const slug = params?.slug || [];
+  return <div>Slug: {slug.join("/")}</div>;
+};
+
+
 // Functional Component for ShopPage
-export default function ShopPage({ params }: PageProps) {
+export default async function ShopPage({ params }: PageProps) {
   // Safe access to params.slug
   const slug = params?.slug || [];
   console.log(slug); // For debugging
